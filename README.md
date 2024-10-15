@@ -45,3 +45,6 @@ El que hauria de sortir-me (segons el que tinc a la base de dades alumnat i a la
 ]
 
 Espero solucionar aquest problema quan abans possible, per poder continuar bé amb la pràctica.
+
+15/10/2024
+Segueixo sense solucionar el problema mencionat anteriorment (encara que ho he barallat, no em funciona).

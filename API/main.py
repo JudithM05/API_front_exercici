@@ -1,9 +1,9 @@
 # Importacions
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, HTTPException
-import Alumnat.db_alumne as db_alumne
-import Alumnat.alumnes as alumnes
-import Alumnat.alumne_aula as alumne_aula
+import db_alumne as db_alumne
+import alumnes as alumnes
+import alumne_aula as alumne_aula
 from pydantic import BaseModel
 from typing import List
 
@@ -26,6 +26,7 @@ class tablaAlumne(BaseModel):
     Grup: str
     DescAula: str
 
+
 # Classe per crear alumnes
 class AlumneCreate(BaseModel):
     idAula: int
@@ -43,7 +44,7 @@ def read_root():
 @app.get("/alumne/list", response_model=List[tablaAlumne])
 def read_alumnes():
     adb = db_alumne.read()
-    alumnes_sch = alumnes.alumnes_schema(adb)
+    alumnes_sch = alumnes.alumnes_schema(adb)  # Convertir el resultado de la DB en el esquema esperado
     return alumnes_sch
 
 
@@ -61,13 +62,13 @@ async def create_alumne(data: AlumneCreate):
     if not db_alumne.aula_exists(data.idAula):
         raise HTTPException(status_code=400, detail="Aula no trobada")
     
-    l_student_id = db_alumne.create(data.idAula, data.nomAlumne, data.cicle, data.curs, data.grup)
-    
+    l_student_id = db_alumne.create(data.idAula, data.nomAlumne, data.cicle, data.curs, data.grup)  # Indentación corregida
     return {
         "msg": "S'ha afegit correctament",
         "id student": l_student_id,
         "nomAlumne": data.nomAlumne
     }
+
 
 # Permet modificar un alumne
 @app.put("/alumne/update/{idAlumne}")
@@ -76,13 +77,13 @@ def update_alumne(idAlumne: int, idAula: int, nomAlumne: str, cicle: str, curs: 
         raise HTTPException(status_code=400, detail="Aula no trobada")
     
     updated_records = db_alumne.update_alumne(idAlumne, idAula, nomAlumne, cicle, curs, grup)
-    
     if updated_records == 0:
         raise HTTPException(status_code=404, detail="No s'han trobat ítems per actualitzar")
-   
+    
     return {
         "msg": "S’ha modificat correctament"
     }
+
     
 # Permet borrar un alumne de la base de dades
 @app.delete("/alumne/delete/{idAlumne}")

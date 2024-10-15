@@ -1,17 +1,18 @@
-from Alumnat.client import db_client
+from client import db_client
 
 #Llegeix tots els alumnes
 def read():
     try:
         conn = db_client()
         cur = conn.cursor()
-        cur.execute("select nomAlumne, cicle, curs, grup, descAula from alumne")
-        students = cur.fetchall()
+        cur.execute("SELECT nomAlumne, cicle, curs, grup, descAula FROM alumne")  # select solo los campos necesarios
+        fetch_alumnes = cur.fetchall()
     except Exception as e:
         return {"status": -1, "message": f"Error de connexió:{e}"}
     finally:
         conn.close()
-    return students
+    return fetch_alumnes
+
 
 
 #Llegeix alumne per alumne a partir de l'id
