@@ -48,3 +48,6 @@ Espero solucionar aquest problema quan abans possible, per poder continuar bé a
 
 15/10/2024
 Segueixo sense solucionar el problema mencionat anteriorment (encara que ho he barallat, no em funciona).
+
+16/10/2024
+Segueixo probant coses i encara no se m'ha solucionat el problema (ho he barallat un altre cop).

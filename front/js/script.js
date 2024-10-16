@@ -24,22 +24,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 //Itera sobre el cicle
                 const cicleCell = document.createElement("td");
-                cicleCell.textContent = alumne.cicle;
+                cicleCell.textContent = alumne.Cicle;
                 row.appendChild(cicleCell);
 
                 //Itera sobre el curs
                 const cursCell = document.createElement("td");
-                cursCell.textContent = alumne.curs;
+                cursCell.textContent = alumne.Curs;
                 row.appendChild(cursCell);
                 
                 //Itera sobre el grup
                 const grupCell = document.createElement("td");
-                grupCell.textContent = alumne.grup;
+                grupCell.textContent = alumne.Grup;
                 row.appendChild(grupCell);
 
                 //Itera sobre l'aula
                 const aulaCell = document.createElement("td");
-                aulaCell.textContent = alumne_aula.descAula;
+                aulaCell.textContent = alumne.DescAula;
                 row.appendChild(aulaCell);
 
                 alumnesTableBody.appendChild(row);

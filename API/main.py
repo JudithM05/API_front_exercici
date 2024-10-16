@@ -44,7 +44,7 @@ def read_root():
 @app.get("/alumne/list", response_model=List[tablaAlumne])
 def read_alumnes():
     adb = db_alumne.read()
-    alumnes_sch = alumnes.alumnes_schema(adb)  # Convertir el resultado de la DB en el esquema esperado
+    alumnes_sch = alumnes.alumnes_schema(adb)
     return alumnes_sch
 
 

@@ -1,6 +1,6 @@
 from client import db_client
 
-#Llegeix tots els alumnes
+# Llegeix tots els alumnes
 def read():
     try:
         conn = db_client()
