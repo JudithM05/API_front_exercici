@@ -1,4 +1,5 @@
 def alumne_schema(fetchAlumnes):
+    print(fetchAlumnes)
     return {
         "NomAlumne": fetchAlumnes[0],
         "Cicle": fetchAlumnes[1],

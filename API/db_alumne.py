@@ -7,6 +7,7 @@ def read():
         cur = conn.cursor()
         cur.execute("SELECT nomAlumne, cicle, curs, grup, descAula FROM alumne")  # select solo los campos necesarios
         fetch_alumnes = cur.fetchall()
+        print(fetch_alumnes)
     except Exception as e:
         return {"status": -1, "message": f"Error de connexió:{e}"}
     finally:
