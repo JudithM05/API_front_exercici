@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Cridem a l'endpoint de l'API fent un fetch
-    fetch('https://alumnat.com/alumne/list').then(res => res.json()).then(data => console.log(data)).catch(err => console.error(err));______________________________________________
+    fetch('http://localhost:8000/alumne/listAll')
         .then(response => {
             if (!response.ok) {
                 throw new Error("Error a la resposta del servidor");
@@ -18,9 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 const nomAluCell = document.createElement("td");
                 nomAluCell.textContent = alumne.NomAlumne;
                 row.appendChild(nomAluCell);
-
-                // Repetir per tots els altres camps restants que retorna l'endpoint
-                _____________________________________________
 
                 //Itera sobre el cicle
                 const cicleCell = document.createElement("td");

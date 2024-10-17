@@ -5,7 +5,7 @@ def read():
     try:
         conn = db_client()
         cur = conn.cursor()
-        cur.execute("SELECT nomAlumne, cicle, curs, grup, descAula FROM alumne")  # select solo los campos necesarios
+        cur.execute("SELECT * FROM alumne")
         fetch_alumnes = cur.fetchall()
         print(fetch_alumnes)
     except Exception as e:
@@ -116,7 +116,7 @@ def read_all():
     try:
         conn = db_client()
         cur = conn.cursor()
-        query = "SELECT a.*, au.descAula, au.edifici, au.pis FROM alumne a JOIN aula au ON a.idAula = au.idAula;"
+        query = "SELECT a.NomAlumne, a.Cicle, a.Curs, a.Grup, au.descAula FROM alumne a JOIN aula au ON a.idAula = au.idAula;"
         
         cur.execute(query)
 

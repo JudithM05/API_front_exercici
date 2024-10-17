@@ -51,3 +51,10 @@ Segueixo sense solucionar el problema mencionat anteriorment (encara que ho he b
 
 16/10/2024
 Segueixo probant coses i encara no se m'ha solucionat el problema (ho he barallat un altre cop).
+
+17/10/2024
+He aconseguit resoldre el problema, i així és com queda la llista d'alumnes a l'html:
+![alt text](image.png)
+
+He intentat fer l'apartat 2, però no estic del tot segura de com fer-lo i qué fer per a que em funcioni bé.
+Espero resoldre aquest apartat i fer el tercer per a completar la pràctica del tot.

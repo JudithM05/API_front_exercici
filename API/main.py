@@ -2,6 +2,7 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, HTTPException
 import db_alumne as db_alumne
+import alumne as alumne
 import alumnes as alumnes
 import alumne_aula as alumne_aula
 from pydantic import BaseModel
@@ -41,20 +42,21 @@ def read_root():
     return {"Alumnat API"}
 
 # Retorna una llista de tots els alumnes
-@app.get("/alumne/list", response_model=List[tablaAlumne])
+@app.get("/alumne/list", response_model=List[dict])
 def read_alumnes():
+    
     adb = db_alumne.read()
-    alumnes_sch = alumnes.alumnes_schema(adb)
+    alumnes_sch = alumne.alumnes_schema(adb)
     return alumnes_sch
 
 
 # Mostra un alumne segons el seu identificador
-@app.get("/alumne/show/{id}", response_model=tablaAlumne)
+@app.get("/alumne/show/{id}", response_model=dict)
 def read_alumne_id(id: int):
     student = db_alumne.read_id(id)
     if student is None:
         raise HTTPException(status_code=404, detail="Item not found")
-    return alumnes.alumne_schema(student)
+    return alumne.alumne_schema(student)
 
 # Crea un alumne i mostra la seva informació
 @app.post("/alumne/add")
@@ -100,4 +102,25 @@ def delete_alumne(idAlumne: int):
 @app.get("/alumne/listAll", response_model=List[tablaAlumne])
 def read_all():
     students_and_classrooms = db_alumne.read_all()
-    return alumne_aula.alumnes_schema(students_and_classrooms)
+    """def read_alumnes(orderby: str | None = None,  contain: str | None = None, skip: int = 0, limit: int | None = None ):"""
+    """adb = db_alumne.read()
+    alumnes_sch = alumne.alumnes_schema(adb)  # Esquema con los datos de los alumnos
+
+    # 1. Filtrar por nombre usando el parámetro 'contain'
+    if contain:
+        alumnes_sch = [alumne for alumne in alumnes_sch if contain.lower() in alumne['NomAlumne'].lower()]
+
+    # 2. Ordenar los resultados por nombre según el parámetro 'orderby'
+    if orderby:
+        if orderby == "asc":
+            alumnes_sch = sorted(alumnes_sch, key=lambda x: x["NomAlumne"])
+        elif orderby == "desc":
+            alumnes_sch = sorted(alumnes_sch, key=lambda x: x["NomAlumne"], reverse=True)
+
+    # 3. Aplicar la paginación usando 'skip' y 'limit'
+    if limit is not None:
+        alumnes_sch = alumnes_sch[skip:skip + limit]
+
+    # Retornar los resultados filtrados, ordenados y paginados
+    return alumnes_sch"""
+    return alumnes.alumnes_schema(students_and_classrooms)
