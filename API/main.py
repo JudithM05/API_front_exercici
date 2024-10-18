@@ -1,12 +1,14 @@
 # Importacions
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, HTTPException
+from fastapi import File, UploadFile
+from typing import Annotated
+from typing import List
 import db_alumne as db_alumne
 import alumne as alumne
 import alumnes as alumnes
 import alumne_aula as alumne_aula
 from pydantic import BaseModel
-from typing import List
 
 app = FastAPI()
 
@@ -137,3 +139,16 @@ def read_alumnes(orderby: str | None = None, contain: str | None = None, skip: i
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error de connexió: {str(e)}")
+    
+# Crea molts alumnes amb la seva informació
+@app.post("/alumne/loadAlumnes")
+async def load_alumnes(data: AlumneCreate):
+    if not db_alumne.aula_exists(data.idAula):
+        raise HTTPException(status_code=400, detail="Aula no trobada")
+    
+    l_student_id = db_alumne.create(data.idAula, data.nomAlumne, data.cicle, data.curs, data.grup)  # Indentación corregida
+    return {
+        "msg": "S'ha afegit correctament",
+        "id student": l_student_id,
+        "nomAlumne": data.nomAlumne
+    }

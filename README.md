@@ -60,4 +60,22 @@ He intentat fer l'apartat 2, però no estic del tot segura de com fer-lo i qué 
 Espero resoldre aquest apartat i fer el tercer per a completar la pràctica del tot.
 
 18/10/2024
-He aconseguit resoldre l'apartat 2.
+He aconseguit resoldre l'apartat 2. Aquests són els resultats:
+
+1) asc:
+![alt text](image-1.png)
+
+2) desc:
+![alt text](image-2.png)
+
+3) contain:
+![alt text](image-3.png)
+
+4) skip:
+![alt text](image-4.png)
+
+5) limit:
+![alt text](image-5.png)
+
+16:16
+He començat a realitzar l'apartat 3 de la pràctica, el que he posat no és del tot correcte, perquè ho he agafat d'un altre mòdul que ja tenia per fer el post, així que l'he de canviar tot i fins ara he estat investigant com resoldre-ho.
