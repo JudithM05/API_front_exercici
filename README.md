@@ -58,3 +58,6 @@ He aconseguit resoldre el problema, i així és com queda la llista d'alumnes a 
 
 He intentat fer l'apartat 2, però no estic del tot segura de com fer-lo i qué fer per a que em funcioni bé.
 Espero resoldre aquest apartat i fer el tercer per a completar la pràctica del tot.
+
+18/10/2024
+He aconseguit resoldre l'apartat 2.
