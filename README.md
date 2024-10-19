@@ -79,3 +79,6 @@ He aconseguit resoldre l'apartat 2. Aquests són els resultats:
 
 16:16
 He començat a realitzar l'apartat 3 de la pràctica, el que he posat no és del tot correcte, perquè ho he agafat d'un altre mòdul que ja tenia per fer el post, així que l'he de canviar tot i fins ara he estat investigant com resoldre-ho.
+
+19/10/2024
+He seguit avançant l'apartat 3, no sé exactament com fer que comprovi si un alumne existeix o no a la base de dades, però espero resoldre-ho aviat i solucionar tot per a completar l'apartat 3 i acabar la pràctica del tot.

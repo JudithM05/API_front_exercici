@@ -8,6 +8,8 @@ import db_alumne as db_alumne
 import alumne as alumne
 import alumnes as alumnes
 import alumne_aula as alumne_aula
+import io
+import csv
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -140,12 +142,30 @@ def read_alumnes(orderby: str | None = None, contain: str | None = None, skip: i
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error de connexió: {str(e)}")
     
-# Crea molts alumnes amb la seva informació
+# Carregar alumnes massivament des d'un csv
 @app.post("/alumne/loadAlumnes")
-async def load_alumnes(data: AlumneCreate):
-    if not db_alumne.aula_exists(data.idAula):
-        raise HTTPException(status_code=400, detail="Aula no trobada")
+async def load_alumnes(file: UploadFile = File(...)):
+    # Comprova si el fitxer és un csv o no
+    if not file.filename.endswith('.csv'):
+        raise HTTPException(status_code=400, detail="El fitxer no és un CSV")
     
+    content = await file.read()
+    csv_content = io.StringIO(content.decode("utf-8"))
+    reader = csv.reader(csv_content)
+    
+    # Omet l'encapçalament
+    next(reader)
+    
+    for row in reader:
+        descAula, edifici, pis, nomAlumne, cicle, curs, grup = row
+        
+    # Gestionar la inserció del aula
+        aula_id = db_alumne.get_aula_id(descAula)
+        if aula_id is None:
+            aula_id = db_alumne.create_aula(descAula, edifici, pis)
+    
+    # Gestionar la inserció dels alumnes
+        
     l_student_id = db_alumne.create(data.idAula, data.nomAlumne, data.cicle, data.curs, data.grup)  # Indentación corregida
     return {
         "msg": "S'ha afegit correctament",
