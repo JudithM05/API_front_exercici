@@ -130,3 +130,47 @@ def read_all():
         conn.close()
         
     return studentsAndClassrooms
+
+# Obtenir l'id de l'aula a partir de la descripció
+def get_aula_id(descAula):
+    try:
+        conn = db_client()
+        cur = conn.cursor()
+        query = "SELECT idAula FROM aula WHERE descAula = %s"
+        cur.execute(query, (descAula,))
+        aula_id = cur.fetchone()
+        return aula_id[0] if aula_id else None
+    except Exception as e:
+        return {"status": -1, "message": f"Error de connexió:{e}"}
+    finally:
+        conn.close()
+
+# Crear aula si no existeix
+def create_aula(descAula, edifici, pis):
+    try:
+        conn = db_client()
+        cur = conn.cursor()
+        query = "INSERT INTO aula (descAula, edifici, pis, createdAt, updatedAt) VALUES (%s, %s, %s, NOW(), NOW());"
+        values = (descAula, edifici, pis)
+        cur.execute(query, values)
+        conn.commit()
+        return cur.lastrowid  # Devuelve el ID del aula recién creada
+    except Exception as e:
+        return {"status": -1, "message": f"Error de connexió:{e}"}
+    finally:
+        conn.close()
+
+# Obtenir l'ID de l'alumne si existeix
+def get_alumne_id(nomAlumne, cicle, curs, grup):
+    try:
+        conn = db_client()
+        cur = conn.cursor()
+        query = "SELECT idAlumne FROM alumne WHERE nomAlumne = %s AND cicle = %s AND curs = %s AND grup = %s"
+        cur.execute(query, (nomAlumne, cicle, curs, grup))
+        alumne_id = cur.fetchone()
+        return alumne_id[0] if alumne_id else None
+    except Exception as e:
+        return {"status": -1, "message": f"Error de connexió:{e}"}
+    finally:
+        conn.close()
+

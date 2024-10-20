@@ -82,3 +82,8 @@ He començat a realitzar l'apartat 3 de la pràctica, el que he posat no és del
 
 19/10/2024
 He seguit avançant l'apartat 3, no sé exactament com fer que comprovi si un alumne existeix o no a la base de dades, però espero resoldre-ho aviat i solucionar tot per a completar l'apartat 3 i acabar la pràctica del tot.
+
+20/10/2024
+
+9:42
+He intentat fer l'apartat 3, i m'ha sortit, però em falla alguna cosa que no entenc per qué i no em deixa carregar tots els alumnes.

@@ -155,20 +155,36 @@ async def load_alumnes(file: UploadFile = File(...)):
     
     # Omet l'encapçalament
     next(reader)
-    
+
+    alumnes_afegits = []
+
     for row in reader:
+        # Assegurar-se que la fila té la longitud correcta
+        if len(row) != 7:
+            raise HTTPException(status_code=400, detail=f"Format incorrecte a la fila: {row}")
+        
         descAula, edifici, pis, nomAlumne, cicle, curs, grup = row
+
+        try:
+            # Gestionar la inserció del aula
+            aula_id = db_alumne.get_aula_id(descAula)
+            if aula_id is None:
+                aula_id = db_alumne.create_aula(descAula, edifici, pis)
+
+            # Gestionar la inserció dels alumnes
+            l_student_id = db_alumne.get_alumne_id(nomAlumne, cicle, curs, grup)
+            if l_student_id is None:
+                l_student_id = db_alumne.create(aula_id, nomAlumne, cicle, curs, grup)
+            
+            alumnes_afegits.append({
+                "id student": l_student_id,
+                "nomAlumne": nomAlumne
+            })
         
-    # Gestionar la inserció del aula
-        aula_id = db_alumne.get_aula_id(descAula)
-        if aula_id is None:
-            aula_id = db_alumne.create_aula(descAula, edifici, pis)
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Error al processar l'alumne {nomAlumne}: {str(e)}")
     
-    # Gestionar la inserció dels alumnes
-        
-    l_student_id = db_alumne.create(data.idAula, data.nomAlumne, data.cicle, data.curs, data.grup)  # Indentación corregida
     return {
-        "msg": "S'ha afegit correctament",
-        "id student": l_student_id,
-        "nomAlumne": data.nomAlumne
+        "msg": "S'ha afegit correctament la càrrega d'alumnes",
+        "alumnes_afegits": alumnes_afegits
     }
